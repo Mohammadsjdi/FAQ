@@ -69,9 +69,10 @@
 </head>
 <body>
     <h1>Enter your FAQ text:</h1>
-    <form method="GET" id="faq-form">
+    <form method="POST" id="faq-form">
         <textarea name="faq_input" rows="10" placeholder="Enter your FAQ here...">{{ faq_input }}</textarea><br>
         <button type="submit">Submit</button>
+        <button type="button" class="reset-button" onclick="resetPage()">Reset</button>
     </form>
 
     {% if processed_output %}
@@ -87,6 +88,12 @@
             copyText.select();
             document.execCommand("copy");
             alert("Output copied to clipboard!");
+        }
+
+        // Function to reset the page
+        function resetPage() {
+            document.getElementById("faq-form").reset();
+            document.getElementById("output-text").value = '';
         }
 
         // Accordion functionality
