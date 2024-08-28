@@ -6,100 +6,22 @@
     <title>FAQ Generator</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        body {
-            font-family: 'Roboto', sans-serif;
-            margin: 0;
-            padding: 0;
-            background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
-        }
-        h1 {
-            color: #333;
-            text-align: center;
-            margin-top: 20px;
-        }
-        form {
-            margin: 20px auto;
-            max-width: 600px;
-            background: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-        textarea {
-            width: 100%;
-            margin-bottom: 10px;
-            padding: 10px;
-            font-size: 16px;
-            border-radius: 5px;
-            border: 1px solid #ddd;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-        button {
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-right: 10px;
-            font-size: 16px;
-            font-weight: bold;
-            text-align: center;
-            transition: all 0.3s ease;
-            display: inline-block;
-        }
-        button:active {
-            transform: translateY(2px);
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-        }
-        .btn-primary {
-            background: linear-gradient(145deg, #007bff, #0056b3);
-            color: white;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-        }
-        .btn-primary:hover {
-            background: linear-gradient(145deg, #0056b3, #004080);
-        }
-        .btn-success {
-            background: linear-gradient(145deg, #28a745, #218838);
-            color: white;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-        }
-        .btn-success:hover {
-            background: linear-gradient(145deg, #218838, #1e7e34);
-        }
-        .btn-danger {
-            background: linear-gradient(145deg, #dc3545, #c82333);
-            color: white;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-        }
-        .btn-danger:hover {
-            background: linear-gradient(145deg, #c82333, #bd2130);
-        }
-        #output-text {
-            width: 100%;
-            padding: 10px;
-            font-size: 14px;
-            border-radius: 5px;
-            border: 1px solid #ddd;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            background-color: #fff;
-            resize: vertical;
-            min-height: 150px; /* Adjust as needed */
-        }
+        /* استایل‌های CSS */
     </style>
 </head>
 <body>
     <h1>Enter your FAQ text:</h1>
-    <form method="POST" id="faq-form">
-        <textarea name="faq_input" rows="10" placeholder="Enter your FAQ here...">{{ faq_input }}</textarea><br>
+    <form method="POST" id="faq-form" action="/">
+        <textarea name="faq_input" rows="10" placeholder="Enter your FAQ here...">[[${faq_input}]]</textarea><br>
         <button type="submit" class="btn-primary">Submit</button>
         <button type="button" class="btn-danger" id="reset-button">Reset</button>
     </form>
 
-    {% if processed_output %}
-    <h2>Generated HTML:</h2>
-    <textarea id="output-text" rows="10">{{ processed_output }}</textarea>
-    <button class="btn-success" id="copy-button">Copy to Clipboard</button>
-    {% endif %}
+    <div th:if="${processed_output}">
+        <h2>Generated HTML:</h2>
+        <textarea id="output-text" rows="10" readonly>[[${processed_output}]]</textarea>
+        <button class="btn-success" id="copy-button">Copy to Clipboard</button>
+    </div>
 
     <script>
         // Function to copy the content of the textarea to clipboard
