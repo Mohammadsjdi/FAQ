@@ -91,4 +91,34 @@
     <h1>Enter your FAQ text:</h1>
     <form method="POST" id="faq-form">
         <textarea name="faq_input" rows="10" placeholder="Enter your FAQ here...">{{ faq_input }}</textarea><br>
-        <button type="submit" class="
+        <button type="submit" class="btn-primary">Submit</button>
+        <button type="button" class="btn-danger" id="reset-button">Reset</button>
+    </form>
+
+    {% if processed_output %}
+    <h2>Generated HTML:</h2>
+    <textarea id="output-text" rows="10">{{ processed_output }}</textarea>
+    <button class="btn-success" id="copy-button">Copy to Clipboard</button>
+    {% endif %}
+
+    <script>
+        // Function to copy the content of the textarea to clipboard
+        function copyOutput() {
+            var copyText = document.getElementById("output-text");
+            copyText.select();
+            document.execCommand("copy");
+            alert("Output copied to clipboard!");
+        }
+
+        // Function to reset the page
+        function resetPage() {
+            document.getElementById("faq-form").reset();
+            document.getElementById("output-text").value = '';
+        }
+
+        // Add event listeners for buttons
+        document.getElementById("copy-button").addEventListener('click', copyOutput);
+        document.getElementById("reset-button").addEventListener('click', resetPage);
+    </script>
+</body>
+</html>
